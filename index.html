@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Optimizing Algorithms From Pairwise User Preferences</title>
+	<meta charset="UTF-8">
+	<meta name="google-site-verification" content="a8ozfdrKssOiKi8c000dPFDpjUot0z2Rp9zC6Sbqk8k" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<!-- <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		html,
+		body,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-family: "Titillium Web", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		}
+
+		< !-- .cite {
+			background: #f0f0f0;
+			padding: 10px;
+			font-size: 18px
+		}
+
+		-->.cite {
+			padding: 0px;
+			background: #ffffff;
+			font-size: 18px
+		}
+
+		.card {
+			border: 1px solid #ccc
+		}
+
+		img {
+			margin-bottom: -6px;
+		}
+
+		p {
+			font-size: 18px;
+		}
+
+		a {
+			text-decoration: none;
+			color: #2196F3;
+		}
+
+		.layered-paper-big {
+			/* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+			box-shadow:
+				0px 0px 1px 1px rgba(0, 0, 0, 0.35),
+				/* The top layer shadow */
+				5px 5px 0 0px #fff,
+				/* The second layer */
+				5px 5px 1px 1px rgba(0, 0, 0, 0.35),
+				/* The second layer shadow */
+				10px 10px 0 0px #fff,
+				/* The third layer */
+				10px 10px 1px 1px rgba(0, 0, 0, 0.35),
+				/* The third layer shadow */
+				15px 15px 0 0px #fff,
+				/* The fourth layer */
+				15px 15px 1px 1px rgba(0, 0, 0, 0.35),
+				/* The fourth layer shadow */
+				20px 20px 0 0px #fff,
+				/* The fifth layer */
+				20px 20px 1px 1px rgba(0, 0, 0, 0.35),
+				/* The fifth layer shadow */
+				25px 25px 0 0px #fff,
+				/* The fifth layer */
+				25px 25px 1px 1px rgba(0, 0, 0, 0.35);
+			/* The fifth layer shadow */
+			margin-left: 10px;
+			margin-right: 60px;
+		}
+
+		table {
+			text-align: center;
+			margin-left: auto;
+			margin-right: auto;
+			border-collapse: collapse;
+		}
+
+		table> :is(thead, tbody)>tr> :is(th, td) {
+			padding: 3px;
+			text-align: center;
+		}
+
+		table>thead>tr> :is(th, td) {
+			border-top: 2px solid;
+			border-bottom: 1px solid;
+		}
+
+		table>tbody>tr:last-child> :is(th, td) {
+			border-bottom: 2px solid;
+		}
+
+		table>tbody {
+			border-top: 2px solid;
+			border-bottom: 1px solid;
+		}
+	</style>
+</head>
+
+<body class="w3-white">
+	<!-- Page Container -->
+	<div class="w3-content w3-margin-top w3-margin-bottom" style="max-width:960px;">
+
+		<!-- The Grid -->
+		<div class="w3-row-padding">
+
+			<!-- paper container -->
+			<div class="w3-display-container w3-row w3-white w3-margin-bottom">
+				<div class="w3-center">
+					<h1>Optimizing Algorithms From Pairwise User Preferences</h1>
+					<h5><a href="https://leonidk.com/">Leonid Keselman</a>, <a href="https://www.ri.cmu.edu/ri-people/katherine-shih/">Katherine Shih</a>, <a href="https://www.cs.cmu.edu/~hebert/">Martial Hebert</a>, <a href="http://www.cs.cmu.edu/~astein/">Aaron Steinfeld</a></h5>
+					<h5><em>IROS 2023</em></h5>
+				</div>
+
+				<div class="w3-center">
+					<h3>[<a href="https://github.com/leonidk/pairwise">Code</a>]</h3>
+
+				</div>
+
+				<hr>
+				<div class="w3-display-container w3-row w3-white w3-margin-bottom w3-center">
+					<img src="images/realsense.png" style="width:85%">
+
+
+					<p><strong>User Preference Tuning</strong> for better stereo depth edges on the Intel RealSense D435.</p>
+
+				</div>
+				<hr>
+				<div class="w3-center">
+					<h2>Abstract</h2>
+				</div>
+				<p>Typical black-box optimization approaches in robotics focus on learning from metric scores. However, that is not always possible, as not all developers have ground truth available. Learning appropriate robot behavior in human-centric contexts often requires querying users, who typically cannot provide precise metric scores. Existing approaches leverage human feedback in an attempt to model an implicit reward function; however, this reward may be difficult or impossible to effectively capture. In this work, we introduce SortCMA to optimize algorithm parameter configurations in high dimensions based on pairwise user preferences. SortCMA efficiently and robustly leverages user input to find parameter sets without directly modeling a reward. We apply this method to tuning a commercial depth sensor without ground truth, and to robot social navigation, which involves highly complex preferences over robot behavior. We show that our method succeeds in optimizing for the user's goals and perform a user study to evaluate social navigation results.
+				</p>
+				<hr>
+
+				<div class="w3-center">
+					<h2>Overview</h2>
+					<p><strong>SortCMA</strong>: An interface to CMA-ES where configurations are evaluated via a user expressing pairwise preferences.</p>
+
+					<img src="images/fig1_iros2.png" style="width:50%">
+				</div>
+				<hr>
+				<div class="w3-center">
+					<h2>Social Navigation</h2>
+					<p><strong>User Study Results</strong>:Across multiple environments, the policies tuned by SortCMA were preferred compared those tuned with metric rewards and another preferential tuning technique. And an example from the Zara environment</p>
+					<img src="images/competent.png" style="width:64%">
+					<img src="images/zara290.png" style="width:34%">
+
+				</div>
+				<div class="w3-center">
+					<h2>Testing Robustness</h2>
+					<p><strong>SortCMA with noise</strong>: on the Ackley Test Function. Showing robustness to erroneous comparisons. </p>
+					<img src="images/pvals.png" style="width:100%">
+				</div>
+
+				<hr>
+				<div class="w3-row w3-margin" style="padding-bottom:2em">
+					<div class="w3-center">
+						<h2>Paper</h2>
+					</div>
+					<div class="w3-col s0 m1 l2" style="height:10px"></div>
+					<div class="w3-col s6 m3 l2">
+						<img class="layered-paper-big" src="images/page1.png" style="width:100%;min-height:200px; margin-right:3em">
+					</div>
+					<div class="w3-col s6 m7 l6" style="padding-left:5em">
+						<div class="cite">
+							Leonid Keselman, Katherine Shih, Martial Hebert, Aaron Steinfeld.
+							<i>Optimizing Algorithms From Pairwise User Preferences.</i>
+							IROS 2023.
+						</div>
+						<h3>[<a href="bib.txt">bibtex</a>]</h3>
+					</div>
+					<div class="w3-col s0 m1 l2" style="height:10px"></div>
+				</div>
+				<hr>
+			</div>
+			<!-- end paper container -->
+
+		</div><!-- End Grid -->
+	</div><!-- End Page Container -->
+
+</body>
+
+</html>

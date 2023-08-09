@@ -1,0 +1,7 @@
+
+@InProceedings{keselmanshih2023pairwise,
+    author    = {Leonid Keselman, Katherine Shih, Martial Hebert and Aaron Steinfeld},
+    title     = {Discovering Multiple Algorithm Configurations},
+    booktitle = {International Conference on Intelligent Robots and Systems (IROS)},
+    year      = {2023},
+}
