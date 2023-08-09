@@ -1,0 +1,5 @@
+numpy
+cma
+scipy
+pymoo
+matplotlib
