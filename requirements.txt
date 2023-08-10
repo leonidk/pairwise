@@ -3,3 +3,4 @@ cma
 scipy
 pymoo
 matplotlib
+cv2
