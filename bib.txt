@@ -1,6 +1,6 @@
 
 @InProceedings{keselmanshih2023pairwise,
-    author    = {Leonid Keselman, Katherine Shih, Martial Hebert and Aaron Steinfeld},
+    author    = {Leonid Keselman and Katherine Shih and Martial Hebert and Aaron Steinfeld},
     title     = {Optimizing Algorithms From Pairwise User Preferences},
     booktitle = {International Conference on Intelligent Robots and Systems (IROS)},
     year      = {2023},
